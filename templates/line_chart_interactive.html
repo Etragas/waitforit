@@ -7,6 +7,7 @@
 <style></style>
 </head>
 <body>
+{{username}}
 <div id="container" class="svg-container"></div>
 <script>
 //------------------------1. PREPARATION------------------------//
@@ -30,16 +31,13 @@ const svg = d3.select("div#container").append("svg")
 
 //-----------------------------DATA-----------------------------//
 const timeConv = d3.timeParse("%d-%b-%Y");
-const dataset_js = d3.json("/get-data", function(error, root){
-    console.log(root);
-    console.log(error);
-// partition.nodes(root); #What does this do?
-// x.domain([0, root.value]).nice(); #What does this do?
-// down(root, 0);
-});
 
-const dataset = d3.csv("static/data/data.csv");
-dataset.then(function(data) {
+// const dataset = d3.csv("static/data/data.csv");
+const dataset_js = d3.json("/get-data")
+dataset_js.then(function(data){
+    console.log(data)
+    data = d3.csvParse(data['csv_data'])
+    console.log(data)
     var slices = data.columns.slice(1).map(function(id) {
         return {
             id: id,
@@ -51,7 +49,7 @@ dataset.then(function(data) {
             })
         };
     });
-   
+
 //----------------------------SCALES----------------------------//
 const xScale = d3.scaleTime().range([0,width]);
 const yScale = d3.scaleLinear().rangeRound([height, 0]);
@@ -80,7 +78,7 @@ const line = d3.line()
 
 let id = 0;
 const ids = function () {
-    return "line-"+{username}+id++;
+    return "line-"+id++;
 }  
 
 //---------------------------TOOLTIP----------------------------//
