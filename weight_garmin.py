@@ -112,9 +112,9 @@ def compute_weekly_loss(dates: List[date], smoothed_measures: List[float]):
     weeks_passed_up = ceil(weeks_passed)
     weight_deficit = -(smoothed_measures[-1] - smoothed_measures[0])
     interpol_ratio = weeks_passed/weeks_passed_up
-    return weight_deficit/weeks_passed*interpol_ratio
+    return round(weight_deficit/weeks_passed*interpol_ratio, 3)
 
 def compute_average_daily_cal_deficit(dates: List[date], smoothed_measures: List[float]):
     days_passed = ((dates[-1] - dates[0]).days)
     weight_deficit = -(smoothed_measures[-1] - smoothed_measures[0])
-    return weight_deficit*3500/days_passed
+    return round(weight_deficit*3500/days_passed, 3)
