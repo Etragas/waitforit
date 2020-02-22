@@ -114,12 +114,15 @@ svg.append("g")
     .text("Frequency");
    
 //----------------------------LINES-----------------------------//
+console.log(slices)
+// const lineslices = slices.filter(d => d.id != 'weight')
 const lines = svg.selectAll("lines")
     .data(slices)
     .enter()
     .append("g");
    
-    lines.append("path")
+    lines.filter(d => d.id != 'weight') //TODO: Cleaner version of this
+    .append("path")
     .attr("class", ids)
     .attr("d", function(d) { return line(d.values); });
    
