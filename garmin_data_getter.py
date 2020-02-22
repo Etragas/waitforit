@@ -31,9 +31,6 @@ class GarminDataGetter():
             print(f"Error occured during Garmin Connect Client setup: {err}")
             print(err.status)
             return None
-        except Exception:  # pylint: disable=broad-except
-            print("Unknown error occured during Garmin Connect Client setup")
-            return None
 
     def _get_body_stats(self, start_date: date):
         """Fetch your body compostion rates"""
