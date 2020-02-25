@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <head>
 <meta charset="utf-8">
-<meta http-equiv="refresh" content="30">
 <title>Multi Line Chart</title>
 <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
 <link rel="stylesheet" type="text/css" href="static/styles/line_chart_interactive.css">
@@ -10,6 +9,16 @@
 <body>
 <div id="container" class="svg-container"></div>
 <script>
+
+setTimeout(function() {
+    var today = new Date();
+    var time = today.getHours();
+    console.log(time)
+    if (time >= 07 && time <= 10){ //Only refresh between 7 and 10 am
+        location.reload();
+    }
+}, 30000);
+
 //------------------------1. PREPARATION------------------------//
 //-----------------------------SVG------------------------------//
 const width = 960;
