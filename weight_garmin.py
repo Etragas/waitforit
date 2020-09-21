@@ -18,7 +18,7 @@ class WeightGarmin(Garmin):
         """
         Fetch available body composition data (only for cDate)
         """
-        bodycompositionurl = self.url_body_composition + '?startDate=' + '2020-04-01' + '&endDate=' + cdate
+        bodycompositionurl = self.url_body_composition + '?startDate=' + '2020-09-01' + '&endDate=' + cdate
         self.logger.debug("Fetching body compostion with url %s", bodycompositionurl)
         try:
             response = self.req.get(bodycompositionurl, headers=self.headers)
