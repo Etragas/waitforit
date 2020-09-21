@@ -18,7 +18,7 @@ class WeightGarmin(Garmin):
         """
         Fetch available body composition data (only for cDate)
         """
-        bodycompositionurl = self.url_body_composition + '?startDate=' + '2020-01-01' + '&endDate=' + cdate
+        bodycompositionurl = self.url_body_composition + '?startDate=' + '2020-04-01' + '&endDate=' + cdate
         self.logger.debug("Fetching body compostion with url %s", bodycompositionurl)
         try:
             response = self.req.get(bodycompositionurl, headers=self.headers)
@@ -26,7 +26,11 @@ class WeightGarmin(Garmin):
             response.raise_for_status()
         except requests.exceptions.HTTPError as err:
             self.logger.debug("Exception occured during body compostion retrieval - perhaps session expired - trying relogin: %s" % err)
-            self.login(self.email, self.password)
+            try:
+                self.login(self.email, self.password)
+            except requests.exceptions.ConnectionError as err:
+                print(f'Connection reset {err}')
+                self.login(self.email, self.password)
             try:
                 response = self.req.get(bodycompositionurl, headers=self.headers)
                 self.logger.debug("Body Compostion response code %s, and json %s", response.status_code, response.json())
