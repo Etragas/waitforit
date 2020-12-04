@@ -69,7 +69,7 @@ const yaxis = d3.axisLeft()
     .scale(yScale);
    
 const xaxis = d3.axisBottom()
-    .ticks(d3.timeDay.every(1))
+    .ticks(d3.timeDay.every(5))
     .tickFormat(d3.timeFormat('%b %d'))
     .scale(xScale);
    
